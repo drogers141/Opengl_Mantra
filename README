@@ -1,0 +1,8 @@
+Dave Rogers
+www.drogers.us
+
+Opengl_Mantra
+
+This project is a collection of OpenGL tools implemented in C++.  There are various geometric classes with general functionality, and an executable that models a Tibetan Buddhist mantra projected around a cylinder. For a demo and description see:
+www.drogers.us/demos/mantra/
+

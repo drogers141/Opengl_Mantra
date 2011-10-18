@@ -1,0 +1,36 @@
+// vertex shader
+// directional lights
+// per pixel lighting
+
+
+#define MAX_LIGHTS 8
+
+// modify and recompile for different number of lights
+#define NUM_LIGHTS 2
+
+// Normal in eye coords
+varying vec3 N;
+
+// Light direction vector and halfway vector for each light source
+varying vec3 L[NUM_LIGHTS], H[NUM_LIGHTS]; 
+
+// Color collects frontlightmodel scene color + ambient from each light
+// Diffuse holds diffuse for each light
+varying vec4 Color, Diffuse[NUM_LIGHTS];
+
+void main() {	
+	gl_Position = ftransform();		
+	N = normalize(gl_NormalMatrix * gl_Normal);
+	
+	Color = gl_FrontLightModelProduct.sceneColor;
+	
+	int i;
+	for(i=0; i<NUM_LIGHTS; i++) {
+	
+		L[i] = normalize(gl_LightSource[i].position.xyz);
+		H[i] = normalize(gl_LightSource[i].halfVector.xyz);
+		
+		Color += gl_FrontMaterial.ambient * gl_LightSource[i].ambient;
+		Diffuse[i] = gl_FrontMaterial.diffuse * gl_LightSource[i].diffuse;
+	}
+}

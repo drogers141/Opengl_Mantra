@@ -1,0 +1,61 @@
+// basic vertex shader for use with one light == GL_LIGHT0
+
+// Normal, Light vectors
+// outgoing are normalized, for what it's worth
+varying vec3 N, L;
+varying vec4 v_color;
+
+void main()
+{
+	// vertex transformed by MVP 
+	gl_Position = gl_ModelViewProjectionMatrix * gl_Vertex;
+	// V is vertex in eye coords
+	vec4 V = gl_ModelViewMatrix * gl_Vertex;
+	
+	// Normal and Light vec in eye coords
+	N = normalize(gl_NormalMatrix * gl_Normal);
+	L = normalize(gl_LightSource[0].position.xyz - V.xyz);
+	
+	
+	// copy primary vert color
+	gl_FrontColor = gl_Color;
+	
+	
+	
+}
+
+					
+    //vec3 ecPosition = vec3(gl_ModelViewMatrix * gl_Vertex);
+    //vec3 tnorm      = normalize(gl_NormalMatrix * gl_Normal);
+    //vec3 lightVec   = normalize(LightPosition.xyz - ecPosition);
+    //vec3 reflectVec = reflect(-lightVec, tnorm);
+    //vec3 viewVec    = normalize(-ecPosition);
+    //float diffuse   = max(dot(lightVec, tnorm), 0.0);
+    //float spec      = 0.0;
+
+    //if (diffuse > 0.0)
+    //{
+    //    spec = max(dot(reflectVec, viewVec), 0.0);
+    //    spec = pow(spec, 16.0);
+    //}
+
+    //LightIntensity = DiffuseContribution * diffuse +
+    //                 SpecularContribution * spec;
+
+	// orig - texture moves with object
+   //MCposition     = gl_Vertex.xy;
+   
+   // make texture stationary - cool
+   //MCposition = ecPosition.xy;
+   	
+   	//Normal = (gl_NormalMatrix * gl_Normal).xyz;
+   	//gl_Color = gl_Color;
+   	
+   	//v_color = vec4(1.0, 0.0, 1.0, 1.0);
+   	//gl_FrontColor = gl_Color;
+   	//Normal = tnorm;
+    //gl_Position    = ftransform();
+					
+					
+					
+					
